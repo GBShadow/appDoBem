@@ -1,18 +1,30 @@
-import React from 'react';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import ChoiceLogin from "./pages/Login/ChoiceLogin";
+import LoginUser from "./pages/Login/LoginUser";
+import LoginOng from "./pages/Login/LoginOng";
 
-const AppStack = createStackNavigator();
+import FormUser from "./pages/Form/FormUser";
+import FormOng from "./pages/Form/FormOng";
 
-import ChoiceLogin from './pages/Login/ChoiceLogin';
+const Routes = createAppContainer(
+  createSwitchNavigator({
+    Login: createStackNavigator(
+      {
+        ChoiceLogin,
+        LoginUser,
+        LoginOng,
+        FormUser,
+        FormOng,
+      },
+      {
+        defaultNavigationOptions: {
+          headerLeft: false
+        },
+      }
+    ),
+  })
+);
 
-export default function Routes() {
-  return (
-    <NavigationContainer>
-      <AppStack.Navigator screenOptions={{ headerShown: false }}>
-        <AppStack.Screen name="ChoiceLogin" component={ChoiceLogin} />
-      </AppStack.Navigator>
-    </NavigationContainer>
-  );
-}
+export default Routes;
